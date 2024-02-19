@@ -12,6 +12,7 @@ all: $(NAME)
 
 $(NAME): $(SRC) $(OBJ)
 	$(MAKE_LIBFT)
+	$(MAKE_LIBFT) bonus
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
 
 clean:
