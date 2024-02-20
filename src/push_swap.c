@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/20 11:38:43 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/20 14:49:20 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-t_ps_list	*ps_lstnew(char *content)
+t_stack	*ps_lstnew(char *content)
 {
-	t_ps_list	*elem;
+	t_stack	*elem;
 
-	elem = malloc(sizeof(t_ps_list));
+	elem = malloc(sizeof(t_stack));
 	if (!elem)
 		return (NULL);
 	elem->content = ft_atoi(content);
@@ -30,59 +30,61 @@ t_ps_list	*ps_lstnew(char *content)
 	return (elem);
 }
 
-t_ps_list	*ps_lstlast(t_ps_list *lst)
+t_stack	*ps_lstlast(t_stack *stack)
 {
-	t_ps_list	*temp;
+	t_stack	*temp;
 
 	temp = NULL;
-	if (lst != NULL)
+	if (stack != NULL)
 	{
-		temp = lst;
+		temp = stack;
 		while (temp-> next)
 		{
-			temp = temp-> next;
+			temp = temp->next;
 		}
 	}
 	return (temp);
 }
 
 
-void	ps_lstadd_back(t_ps_list **lst, t_ps_list *new)
+void	ps_lstadd_back(t_stack **stack, t_stack *new)
 {
-	t_ps_list	*last;
+	t_stack	*last;
 
-	if (lst != NULL && new != NULL)
+	if (stack != NULL && new != NULL)
 	{
-		if (*lst == NULL)
-			*lst = new;
+		if (*stack == NULL)
+			*stack = new;
 		else
 		{
-			last = ps_lstlast(*lst);
+			last = ps_lstlast(*stack);
 			last->next = new;
 		}
 	}
 }
 
-void	free_list(t_ps_list **head)
+void	free_list(t_stack **stack)
 {
-	t_ps_list	*previous;
+	t_stack	*previous;
 
-	while (*head)
+	while (*stack)
 	{
-		previous = *head;
-		*head = (*head)->next;
+		previous = *stack;
+		*stack = (*stack)->next;
 		free (previous);
 	}
 }
 
-void	free_tab(char ***tab)
+void	free_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	while ((*tab)[i])
-		free ((*tab)[i++]);
-	free((*tab));
+	while (tab[i])
+	{
+		free (tab[i++]);
+	}
+	free(tab);
 }
 
 int	tab_is_digit(char **tab)
@@ -96,40 +98,41 @@ int	tab_is_digit(char **tab)
 		x = 0;
 		while (tab[y][x])
 		{
-			if (!ft_isdigit(tab[y][x]))
+			if (ft_isdigit(tab[y][x]) || tab[y][x] == '-' || tab[y][x] == '+')
+				x++;
+			else
 				return (0);
-			x++;
 		}
 		y++;
 	}
 	return (1);
 }
 
-void	create_a_list(char **numbers, t_ps_list **head)
+void	create_a_list(char **tab, t_stack **stack)
 {
-	t_ps_list			*node;
+	t_stack			*node;
 	int					i;
 	
 	i = 0;
-	*head = ps_lstnew(numbers[i++]);
-	while (numbers[i])
+	*stack = ps_lstnew(tab[i++]);
+	while (tab[i])
 	{
-		node = ps_lstnew(numbers[i]);
-		ps_lstadd_back(head, node);
+		node = ps_lstnew(tab[i]);
+		ps_lstadd_back(stack, node);
 		i++;
 	}
 }
 
-void	print_list(t_ps_list *head)
+void	print_list(t_stack *stack)
 {
-	while (head)
+	while (stack)
 	{
-		printf("%d\n", head->content);
-		head = head->next;
+		printf("%d\n", stack->content);
+		stack = stack->next;
 	}
 }
 
-int	is_int(char **numbers)
+int	is_int(char **tab)
 {
 	int			sign;
 	long int	result;
@@ -137,20 +140,20 @@ int	is_int(char **numbers)
 	int			x;
 
 	i = 0;
-	while (numbers[i])
+	while (tab[i])
 	{
 		result = 0;
 		sign = 1;
 		x = 0;
-		if (numbers[i][x] == '-' || numbers[i][x] == '+')
+		if (tab[i][x] == '-' || tab[i][x] == '+')
 		{
-			if (numbers[i][x] == '-')
+			if (tab[i][x] == '-')
 				sign = -1;
 			x++;
 		}
-		while (numbers[i][x] >= '0' && numbers[i][x] <= '9')
+		while (tab[i][x] >= '0' && tab[i][x] <= '9')
 		{
-			result = result * 10 + numbers[i][x] - 48;
+			result = result * 10 + tab[i][x] - 48;
 			x++;
 		}
 		result *= sign;
@@ -161,30 +164,47 @@ int	is_int(char **numbers)
 	return (1);
 }
 
+void	init_with_split(char ***argv, t_stack **a)
+{
+	char	**numbers;
+	numbers = ft_split((*argv)[1], ' ');
+	if (!tab_is_digit(numbers))
+	{
+		free_tab(numbers);
+		ft_error();
+	}
+	if (!is_int(numbers))
+	{
+		free_tab(numbers);
+		ft_error();
+	}
+	create_a_list(numbers, a);
+	print_list(*a);
+	free_list(a);
+	free_tab(numbers);
+}
+
+void	init_without_split(char ***argv, t_stack **a)
+{
+	if (!tab_is_digit(*argv + 1))
+		ft_error();
+	if (!is_int(*argv + 1))
+		ft_error();
+	create_a_list(*argv + 1, a);
+	print_list(*a);
+	free_list(a);
+}
+
 int	main(int argc, char **argv)
 {
-	char			**numbers;
-	t_ps_list			*head;
+	t_stack			*a;
+	//t_stack			*b;
 
-	if (argc < 2)
-		return 1;
-	if (argc == 2)
-	{
-		head = NULL;
-		numbers = ft_split(argv[1], ' ');
-		if (!tab_is_digit(numbers))
-		{
-			free_tab(&numbers);
-			ft_error();
-		}
-		if (!is_int(numbers))
-		{
-			free_tab(&numbers);
-			ft_error();
-		}
-		create_a_list(numbers, &head);
-		print_list(head);
-		free_list(&head);
-		free_tab(&numbers);
-	}
+	a = NULL;
+	if (argc == 1 || (argc == 2 && !argv[1][0]))
+		return (1);
+	else if (argc == 2)
+		init_with_split(&argv, &a);
+	else if (argc > 2)
+		init_without_split(&argv, &a);
 }
