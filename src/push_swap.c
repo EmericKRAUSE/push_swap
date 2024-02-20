@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/20 14:49:20 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/20 15:10:31 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,21 +164,47 @@ int	is_int(char **tab)
 	return (1);
 }
 
+int	search_in_stack(t_stack *stack, int nb)
+{
+	while (stack)
+	{
+		if (stack->content == nb)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
+}
+
+int	check_for_occurrence(t_stack *stack)
+{
+	t_stack	*current;
+
+	current = stack;
+	while(current)
+	{
+		if (search_in_stack(current->next, current->content))
+			return (0);
+		current = current->next;
+	}
+	return (1);
+}
+
 void	init_with_split(char ***argv, t_stack **a)
 {
 	char	**numbers;
 	numbers = ft_split((*argv)[1], ' ');
-	if (!tab_is_digit(numbers))
-	{
-		free_tab(numbers);
-		ft_error();
-	}
-	if (!is_int(numbers))
+	if (!tab_is_digit(numbers) || !is_int(numbers))
 	{
 		free_tab(numbers);
 		ft_error();
 	}
 	create_a_list(numbers, a);
+	if (!check_for_occurrence(*a))
+	{
+		free_tab(numbers);
+		free_list(a);
+		ft_error();
+	}
 	print_list(*a);
 	free_list(a);
 	free_tab(numbers);
@@ -186,11 +212,14 @@ void	init_with_split(char ***argv, t_stack **a)
 
 void	init_without_split(char ***argv, t_stack **a)
 {
-	if (!tab_is_digit(*argv + 1))
-		ft_error();
-	if (!is_int(*argv + 1))
+	if (!tab_is_digit(*argv + 1) || !is_int(*argv + 1))
 		ft_error();
 	create_a_list(*argv + 1, a);
+	if (!check_for_occurrence(*a))
+	{
+		free_list(a);
+		ft_error();
+	}
 	print_list(*a);
 	free_list(a);
 }
