@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/20 15:10:31 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/20 20:59:15 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_stack	*ps_lstnew(char *content)
 		return (NULL);
 	elem->content = ft_atoi(content);
 	elem->next = NULL;
+	elem->prev = NULL;
 	return (elem);
 }
 
@@ -59,6 +60,7 @@ void	ps_lstadd_back(t_stack **stack, t_stack *new)
 		{
 			last = ps_lstlast(*stack);
 			last->next = new;
+			new->prev = last;
 		}
 	}
 }
@@ -114,7 +116,6 @@ void	create_a_list(char **tab, t_stack **stack)
 	int					i;
 	
 	i = 0;
-	*stack = ps_lstnew(tab[i++]);
 	while (tab[i])
 	{
 		node = ps_lstnew(tab[i]);
@@ -205,9 +206,6 @@ void	init_with_split(char ***argv, t_stack **a)
 		free_list(a);
 		ft_error();
 	}
-	print_list(*a);
-	free_list(a);
-	free_tab(numbers);
 }
 
 void	init_without_split(char ***argv, t_stack **a)
@@ -220,20 +218,33 @@ void	init_without_split(char ***argv, t_stack **a)
 		free_list(a);
 		ft_error();
 	}
-	print_list(*a);
-	free_list(a);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
-	//t_stack			*b;
+	t_stack			*b;
 
 	a = NULL;
+	b = NULL;
+	b = ps_lstnew("0");
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
 		init_with_split(&argv, &a);
 	else if (argc > 2)
 		init_without_split(&argv, &a);
+	printf ("b :");
+	print_list(b);
+	printf ("\n");
+	printf ("a :");
+	print_list(a);
+	printf ("\n");
+	push(&a, &b);
+	printf ("b :");
+	print_list(b);
+	printf ("\n");
+	printf ("a :");
+	print_list(a);
+
 }
