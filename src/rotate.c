@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:39 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/21 13:07:15 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/21 13:58:32 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+void	rotate(t_stack **stack)
 {
 	t_stack *temp;
-	
-	if (!*stack2)
+	t_stack *last;
+
+	if (count_stack(*stack) < 2)
 		return ;
-	temp = *stack2;
-	*stack2 = (*stack2)->next;
-	if (*stack2)
-		(*stack2)->prev = NULL;
-	if (!*stack1)
-	{
-		*stack1 = temp;
-		temp->next = NULL;
-	}
-	else
-	{
-		temp->next = *stack1;
-		(*stack1)->prev = temp;
-		*stack1 = temp;
-	}
+	temp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	last = ps_lstlast(*stack);
+	last->next = temp;
+	temp->prev = last;
+	temp->next = NULL;
 }

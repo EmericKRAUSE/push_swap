@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 11:09:24 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:10:08 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,23 @@ typedef struct s_stack
 }					t_stack;
 
 //**********/
-//UTILS
-int	count_stack(t_stack *stack);
+//PUSH SWAP
 void	swap(t_stack **stack);
 void	push(t_stack **stack1, t_stack **stack2);
+void	rotate(t_stack **stack);
+
+//**********/
+//LIST FUNCTIONS
+void	create_a_list(char **tab, t_stack **stack);
+void	print_list(t_stack *stack);
+void	ps_lstadd_back(t_stack **stack, t_stack *new);
+t_stack	*ps_lstlast(t_stack *stack);
+t_stack	*ps_lstnew(char *content);
+void	reverse_print_list(t_stack *stack);
+
+//**********/
+//UTILS
+int	count_stack(t_stack *stack);
 
 //**********/
 //ERROR

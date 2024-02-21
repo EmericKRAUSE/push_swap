@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   print_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:39 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/21 13:10:26 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/21 14:09:08 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+void	print_list(t_stack *stack)
 {
-	t_stack *temp;
-	
-	if (!*stack2)
-		return ;
-	temp = *stack2;
-	*stack2 = (*stack2)->next;
-	if (*stack2)
-		(*stack2)->prev = NULL;
-	if (!*stack1)
+	int	i;
+
+	i = 0;
+	printf("print:\n");
+	while (stack)
 	{
-		*stack1 = temp;
-		temp->next = NULL;
+		printf("%d: %d\n", i++, stack->content);
+		stack = stack->next;
 	}
-	else
-	{
-		temp->next = *stack1;
-		(*stack1)->prev = temp;
-		*stack1 = temp;
-	}
+	printf("\n");
 }

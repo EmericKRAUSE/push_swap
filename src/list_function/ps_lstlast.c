@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ps_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:39 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/21 13:12:29 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/21 13:12:37 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+t_stack	*ps_lstlast(t_stack *stack)
 {
-	t_stack *temp;
-	
-	if (!*stack2)
-		return ;
-	temp = *stack2;
-	*stack2 = (*stack2)->next;
-	if (*stack2)
-		(*stack2)->prev = NULL;
-	if (!*stack1)
+	t_stack	*temp;
+
+	temp = NULL;
+	if (stack != NULL)
 	{
-		*stack1 = temp;
-		temp->next = NULL;
+		temp = stack;
+		while (temp-> next)
+		{
+			temp = temp->next;
+		}
 	}
-	else
-	{
-		temp->next = *stack1;
-		(*stack1)->prev = temp;
-		*stack1 = temp;
-	}
+	return (temp);
 }

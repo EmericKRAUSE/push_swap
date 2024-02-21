@@ -6,58 +6,11 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 11:12:16 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/21 14:37:06 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-t_stack	*ps_lstnew(char *content)
-{
-	t_stack	*elem;
-
-	elem = malloc(sizeof(t_stack));
-	if (!elem)
-		return (NULL);
-	elem->content = ft_atoi(content);
-	elem->next = NULL;
-	elem->prev = NULL;
-	return (elem);
-}
-
-t_stack	*ps_lstlast(t_stack *stack)
-{
-	t_stack	*temp;
-
-	temp = NULL;
-	if (stack != NULL)
-	{
-		temp = stack;
-		while (temp-> next)
-		{
-			temp = temp->next;
-		}
-	}
-	return (temp);
-}
-
-
-void	ps_lstadd_back(t_stack **stack, t_stack *new)
-{
-	t_stack	*last;
-
-	if (stack != NULL && new != NULL)
-	{
-		if (*stack == NULL)
-			*stack = new;
-		else
-		{
-			last = ps_lstlast(*stack);
-			last->next = new;
-			new->prev = last;
-		}
-	}
-}
 
 int	tab_is_digit(char **tab)
 {
@@ -78,29 +31,6 @@ int	tab_is_digit(char **tab)
 		y++;
 	}
 	return (1);
-}
-
-void	create_a_list(char **tab, t_stack **stack)
-{
-	t_stack			*node;
-	int					i;
-	
-	i = 0;
-	while (tab[i])
-	{
-		node = ps_lstnew(tab[i]);
-		ps_lstadd_back(stack, node);
-		i++;
-	}
-}
-
-void	print_list(t_stack *stack)
-{
-	while (stack)
-	{
-		printf("%d\n", stack->content);
-		stack = stack->next;
-	}
 }
 
 int	is_int(char **tab)
@@ -185,17 +115,31 @@ void	init_without_split(char ***argv, t_stack **a)
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
-	//t_stack			*b;
+	t_stack			*b;
 
 	a = NULL;
-	//b = NULL;
+	b = NULL;
+	create_a_list(argv + 1, &b);
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
 		init_with_split(&argv, &a);
 	else if (argc > 2)
 		init_without_split(&argv, &a);
+
 	print_list(a);
+	reverse_print_list(a);
+	print_list(b);
+	reverse_print_list(b);
+
+	push(&a, &b);
+
+	print_list(a);
+	reverse_print_list(a);
+	print_list(b);
+	reverse_print_list(b);
+
 	free_list(&a);
+
 	return (0);
 }

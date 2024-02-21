@@ -1,13 +1,20 @@
 NAME		=	push_swap
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-SRC			=	src/free_list.c\
+SRC			=	src/push_swap.c\
+				src/push.c\
+				src/swap.c\
+				src/rotate.c\
+				src/list_function/create_a_list.c\
+				src/list_function/print_list.c\
+				src/list_function/ps_lstadd_back.c\
+				src/list_function/ps_lstlast.c\
+				src/list_function/ps_lstnew.c\
+				src/list_function/reverse_print_list.c\
+				src/free_list.c\
 				src/free_tab.c\
 				src/ft_error.c\
 				src/handle_error.c\
-				src/push_swap.c\
-				src/push.c\
-				src/swap.c\
 				src/utils.c
 
 OBJ 		=	${SRC:.c=.o}

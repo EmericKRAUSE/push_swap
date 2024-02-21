@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   ps_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:32:39 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/21 13:13:07 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/21 13:13:14 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+t_stack	*ps_lstnew(char *content)
 {
-	t_stack *temp;
-	
-	if (!*stack2)
-		return ;
-	temp = *stack2;
-	*stack2 = (*stack2)->next;
-	if (*stack2)
-		(*stack2)->prev = NULL;
-	if (!*stack1)
-	{
-		*stack1 = temp;
-		temp->next = NULL;
-	}
-	else
-	{
-		temp->next = *stack1;
-		(*stack1)->prev = temp;
-		*stack1 = temp;
-	}
+	t_stack	*elem;
+
+	elem = malloc(sizeof(t_stack));
+	if (!elem)
+		return (NULL);
+	elem->content = ft_atoi(content);
+	elem->next = NULL;
+	elem->prev = NULL;
+	return (elem);
 }
