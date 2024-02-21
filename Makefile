@@ -1,9 +1,13 @@
 NAME		=	push_swap
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-SRC			=	src/push_swap.c\
-				src/swap.c\
+SRC			=	src/free_list.c\
+				src/free_tab.c\
+				src/ft_error.c\
+				src/handle_error.c\
+				src/push_swap.c\
 				src/push.c\
+				src/swap.c\
 				src/utils.c
 
 OBJ 		=	${SRC:.c=.o}

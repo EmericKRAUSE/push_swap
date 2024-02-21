@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 10:27:40 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/21 11:01:06 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/21 11:01:29 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+void	free_tab(char ***tab)
 {
-	t_stack *temp;
-	
-	if (!*stack2)
-		return ;
-	temp = *stack2;
-	*stack2 = (*stack2)->next;
-	if (!*stack1)
-		*stack1 = temp;
-	else
+	int	i;
+
+	i = 0;
+	while ((*tab)[i])
 	{
-		temp->next = *stack1;
-		(*stack1)->prev = temp;
-		*stack1 = temp;
+		free ((*tab)[i++]);
 	}
+	free(*tab);
 }

@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 10:27:40 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/21 10:56:52 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/21 11:16:30 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	push(t_stack **stack1, t_stack **stack2)
+void	handle_error(t_stack **a, char ***numbers)
 {
-	t_stack *temp;
-	
-	if (!*stack2)
-		return ;
-	temp = *stack2;
-	*stack2 = (*stack2)->next;
-	if (!*stack1)
-		*stack1 = temp;
-	else
-	{
-		temp->next = *stack1;
-		(*stack1)->prev = temp;
-		*stack1 = temp;
-	}
+	free_list(a);
+    if (numbers && *numbers)
+        free_tab(numbers);
+    ft_error();
 }

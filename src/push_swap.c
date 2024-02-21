@@ -6,17 +6,11 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/20 20:59:15 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/21 11:12:16 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-void	ft_error(void)
-{
-	ft_putendl_fd("Error", 1);
-	exit(EXIT_FAILURE);
-}
 
 t_stack	*ps_lstnew(char *content)
 {
@@ -63,30 +57,6 @@ void	ps_lstadd_back(t_stack **stack, t_stack *new)
 			new->prev = last;
 		}
 	}
-}
-
-void	free_list(t_stack **stack)
-{
-	t_stack	*previous;
-
-	while (*stack)
-	{
-		previous = *stack;
-		*stack = (*stack)->next;
-		free (previous);
-	}
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free (tab[i++]);
-	}
-	free(tab);
 }
 
 int	tab_is_digit(char **tab)
@@ -184,28 +154,23 @@ int	check_for_occurrence(t_stack *stack)
 	while(current)
 	{
 		if (search_in_stack(current->next, current->content))
-			return (0);
+			return (1);
 		current = current->next;
 	}
-	return (1);
+	return (0);
 }
 
 void	init_with_split(char ***argv, t_stack **a)
 {
 	char	**numbers;
+	
 	numbers = ft_split((*argv)[1], ' ');
 	if (!tab_is_digit(numbers) || !is_int(numbers))
-	{
-		free_tab(numbers);
-		ft_error();
-	}
+		handle_error(a, &numbers);
 	create_a_list(numbers, a);
-	if (!check_for_occurrence(*a))
-	{
-		free_tab(numbers);
-		free_list(a);
-		ft_error();
-	}
+	if (check_for_occurrence(*a))
+		handle_error(a, &numbers);
+	free_tab(&numbers);
 }
 
 void	init_without_split(char ***argv, t_stack **a)
@@ -213,38 +178,24 @@ void	init_without_split(char ***argv, t_stack **a)
 	if (!tab_is_digit(*argv + 1) || !is_int(*argv + 1))
 		ft_error();
 	create_a_list(*argv + 1, a);
-	if (!check_for_occurrence(*a))
-	{
-		free_list(a);
-		ft_error();
-	}
+	if (check_for_occurrence(*a))
+		handle_error(a, NULL);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
-	t_stack			*b;
+	//t_stack			*b;
 
 	a = NULL;
-	b = NULL;
-	b = ps_lstnew("0");
+	//b = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
 		init_with_split(&argv, &a);
 	else if (argc > 2)
 		init_without_split(&argv, &a);
-	printf ("b :");
-	print_list(b);
-	printf ("\n");
-	printf ("a :");
 	print_list(a);
-	printf ("\n");
-	push(&a, &b);
-	printf ("b :");
-	print_list(b);
-	printf ("\n");
-	printf ("a :");
-	print_list(a);
-
+	free_list(&a);
+	return (0);
 }
