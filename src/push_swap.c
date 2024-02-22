@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/22 14:20:55 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/22 20:53:47 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,45 +135,99 @@ void	sort_three(t_stack **stack)
 	if (a > b && b > c)
 	{
 		swap(stack);
-		reverse_rotate(stack);		
+		ft_putendl_fd("sa", 1);
+		reverse_rotate(stack);
+		ft_putendl_fd("rra", 1);
 	}
 	else if (a > b && b < c && a > c)
+	{
 		rotate(stack);
+		ft_putendl_fd("ra", 1);
+	}
 	else if (a < b && a < c)
 	{
 		swap(stack);
+		ft_putendl_fd("sa", 1);
 		rotate(stack);
+		ft_putendl_fd("ra", 1);
 	}
 	else if (a < b && b > c)
+	{
 		reverse_rotate(stack);
+		ft_putendl_fd("ra", 1);
+	}
 	else if (a > b && b < c && a < c)
+	{
 		swap(stack);
+		ft_putendl_fd("sa", 1);
+	}
+}
+
+t_stack	*search_the_smallest(t_stack *a)
+{
+	t_stack *smallest;
+
+	if (!a)
+		return (NULL);
+	smallest = a;
+	while (a)
+	{
+		if (a->content < smallest->content)
+			smallest = a;
+		a = a->next;
+	}
+	return(smallest);
+}
+
+void	insertion_sort(t_stack **a, t_stack	**b)
+{
+	t_stack *smallest;
+	
+	int i = 0;
+	while (i < count_stack(*a))
+	{
+		smallest = search_the_smallest(*a);
+		while (smallest->prev != NULL)
+		{
+			rotate(a);
+			ft_putendl_fd("ra", 1);
+		}
+		push(b, a);
+		ft_putendl_fd("pb", 1);
+	}
+	while (i < count_stack(*b))
+	{
+		push(a, b);
+		ft_putendl_fd("pa", 1);
+	}
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
-	//t_stack			*b;
+	t_stack			*b;
 
 	a = NULL;
-	//b = NULL;
+	b = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
 		init_with_split(&argv, &a);
 	else if (argc > 2)
 		init_without_split(&argv, &a);
-	print_list(a);
 	if (!is_sorted(a))
 	{
 		if (count_stack(a) == 2)
 			swap(&a);
-		if (count_stack(a) == 3)
+		else if (count_stack(a) == 3)
 			sort_three(&a);
-		if (count_stack(a) > 3)
-			turk_algorithm();
+		else if (count_stack(a) > 3)
+			insertion_sort(&a, &b);
 	}
 	print_list(a);
+	if (is_sorted(a))
+		printf("a stack is sorted\n");
 	free_list(&a);
+	free_list(&b);
 	return (0);
 }

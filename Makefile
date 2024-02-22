@@ -29,7 +29,6 @@ $(NAME): $(SRC) $(OBJ)
 	$(MAKE_LIBFT)
 	$(MAKE_LIBFT) bonus
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
-	./$(NAME) "1 2 3 4 5 6 7 8 9 10" | cat -e
 
 clean:
 	rm -rf $(OBJ)
