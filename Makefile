@@ -5,6 +5,7 @@ SRC			=	src/push_swap.c\
 				src/push.c\
 				src/swap.c\
 				src/rotate.c\
+				src/reverse_rotate.c\
 				src/list_function/create_a_list.c\
 				src/list_function/print_list.c\
 				src/list_function/ps_lstadd_back.c\

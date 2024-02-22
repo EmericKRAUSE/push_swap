@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:37:06 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/22 14:20:55 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,34 +112,68 @@ void	init_without_split(char ***argv, t_stack **a)
 		handle_error(a, NULL);
 }
 
+int	is_sorted(t_stack *stack)
+{
+	while (stack && stack->next != NULL)
+	{
+		if (stack->content >= stack->next->content)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+void	sort_three(t_stack **stack)
+{
+	int	a;
+	int b;
+	int c;
+
+	a = (*stack)->content;
+	b = (*stack)->next->content;
+	c = (*stack)->next->next->content;
+	if (a > b && b > c)
+	{
+		swap(stack);
+		reverse_rotate(stack);		
+	}
+	else if (a > b && b < c && a > c)
+		rotate(stack);
+	else if (a < b && a < c)
+	{
+		swap(stack);
+		rotate(stack);
+	}
+	else if (a < b && b > c)
+		reverse_rotate(stack);
+	else if (a > b && b < c && a < c)
+		swap(stack);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
-	t_stack			*b;
+	//t_stack			*b;
 
 	a = NULL;
-	b = NULL;
-	create_a_list(argv + 1, &b);
+	//b = NULL;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
 		init_with_split(&argv, &a);
 	else if (argc > 2)
 		init_without_split(&argv, &a);
-
 	print_list(a);
-	reverse_print_list(a);
-	print_list(b);
-	reverse_print_list(b);
-
-	push(&a, &b);
-
+	if (!is_sorted(a))
+	{
+		if (count_stack(a) == 2)
+			swap(&a);
+		if (count_stack(a) == 3)
+			sort_three(&a);
+		if (count_stack(a) > 3)
+			turk_algorithm();
+	}
 	print_list(a);
-	reverse_print_list(a);
-	print_list(b);
-	reverse_print_list(b);
-
 	free_list(&a);
-
 	return (0);
 }

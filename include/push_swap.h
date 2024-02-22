@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:10:08 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:37:44 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_stack
 void	swap(t_stack **stack);
 void	push(t_stack **stack1, t_stack **stack2);
 void	rotate(t_stack **stack);
+void	reverse_rotate(t_stack **stack);
 
 //**********/
 //LIST FUNCTIONS

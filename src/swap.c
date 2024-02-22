@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:59:40 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/20 19:45:46 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/22 12:25:48 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 void	swap(t_stack **stack)
 {
-	t_stack	*temp;
+	t_stack	*first;
+	t_stack	*second;
 
 	if (count_stack(*stack) < 2)
 		return ;
-	temp = (*stack)->next;
-	(*stack)->next = temp->next;
-	temp->next = *stack;
-	*stack = temp;
+	first = *stack;
+	second = (*stack)->next;
+	first->next = second->next;
+	first->prev = second;
+	second->next = first;
+	second->prev = NULL;
+	if (first->next != NULL)
+		first->next->prev = first;
+	*stack = second;
 }
