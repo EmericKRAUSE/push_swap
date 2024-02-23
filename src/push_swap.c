@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/22 20:53:47 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/23 14:16:41 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,39 +163,76 @@ void	sort_three(t_stack **stack)
 	}
 }
 
-t_stack	*search_the_smallest(t_stack *a)
+t_stack	*search_the_smallest(t_stack *a, int i, int j)
 {
 	t_stack *smallest;
-
+	
 	if (!a)
 		return (NULL);
 	smallest = a;
-	while (a)
+	while (i < j)
 	{
 		if (a->content < smallest->content)
 			smallest = a;
 		a = a->next;
+		i++;
 	}
 	return(smallest);
+}
+
+int	get_index(t_stack *smallest, t_stack *stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack && stack != smallest)
+	{
+		i++;
+		stack = stack->next;
+	}
+	return (i);
+}
+
+void	normal_sort(t_stack **smallest, t_stack **a, t_stack **b)
+{
+	while ((*smallest)->prev != NULL)
+	{
+		rotate(a);
+		ft_putendl_fd("ra", 1);
+	}
+	push(b, a);
+	ft_putendl_fd("pb", 1);
+}
+
+void	reverse_sort(t_stack **smallest, t_stack **a, t_stack **b)
+{
+	while ((*smallest)->prev != NULL)
+	{
+		reverse_rotate(a);
+		ft_putendl_fd("rra", 1);
+	}
+	push(b, a);
+	ft_putendl_fd("pb", 1);
 }
 
 void	insertion_sort(t_stack **a, t_stack	**b)
 {
 	t_stack *smallest;
-	
-	int i = 0;
-	while (i < count_stack(*a))
+	int	i;
+	int j;
+
+	i = 0;
+	j = count_stack(*a) / 2;
+	while (i < j)
 	{
-		smallest = search_the_smallest(*a);
-		while (smallest->prev != NULL)
-		{
-			rotate(a);
-			ft_putendl_fd("ra", 1);
-		}
-		push(b, a);
-		ft_putendl_fd("pb", 1);
+		smallest = search_the_smallest(*a, i, j);
+		if (get_index(smallest, *a) < (j / 2))
+			normal_sort(&smallest, a, b);
+		else
+			reverse_sort(&smallest, a, b);
+		j--;
 	}
-	while (i < count_stack(*b))
+	while (count_stack(*b) > 0)
 	{
 		push(a, b);
 		ft_putendl_fd("pa", 1);
@@ -224,9 +261,6 @@ int	main(int argc, char **argv)
 		else if (count_stack(a) > 3)
 			insertion_sort(&a, &b);
 	}
-	print_list(a);
-	if (is_sorted(a))
-		printf("a stack is sorted\n");
 	free_list(&a);
 	free_list(&b);
 	return (0);
