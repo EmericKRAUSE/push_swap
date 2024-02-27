@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:10:26 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:09:08 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/27 14:01:54 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_list(t_stack *stack)
 	printf("print:\n");
 	while (stack)
 	{
-		printf("%d: %d\n", i++, stack->content);
+		printf("%d: %d\n", i++, stack->index);
 		stack = stack->next;
 	}
 	printf("\n");

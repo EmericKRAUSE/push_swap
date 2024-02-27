@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/22 12:37:44 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/27 11:31:36 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_stack
 	struct s_stack	*next;
 	struct s_stack	*prev;
 	int				content;
+	int				index;
 }					t_stack;
 
 //**********/

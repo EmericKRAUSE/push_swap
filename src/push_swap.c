@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/23 14:16:41 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/27 15:57:47 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,21 +163,36 @@ void	sort_three(t_stack **stack)
 	}
 }
 
-t_stack	*search_the_smallest(t_stack *a, int i, int j)
+t_stack	*find_the_smallest(t_stack *stack)
 {
 	t_stack *smallest;
 	
-	if (!a)
+	if (!stack)
 		return (NULL);
-	smallest = a;
-	while (i < j)
+	smallest = stack;
+	while (stack)
 	{
-		if (a->content < smallest->content)
-			smallest = a;
-		a = a->next;
-		i++;
+		if (stack->content < smallest->content)
+			smallest = stack;
+		stack = stack->next;
 	}
 	return(smallest);
+}
+
+t_stack	*find_the_tallest(t_stack *stack)
+{
+	t_stack *tallest;
+	
+	if (!stack)
+		return (NULL);
+	tallest = stack;
+	while (stack)
+	{
+		if (stack->content > tallest->content)
+			tallest = stack;
+		stack = stack->next;
+	}
+	return(tallest);
 }
 
 int	get_index(t_stack *smallest, t_stack *stack)
@@ -193,50 +208,154 @@ int	get_index(t_stack *smallest, t_stack *stack)
 	return (i);
 }
 
-void	normal_sort(t_stack **smallest, t_stack **a, t_stack **b)
+void	sort_a(t_stack *smallest, t_stack **a, t_stack **b, int reverse)
 {
-	while ((*smallest)->prev != NULL)
+	while (smallest->prev != NULL)
 	{
-		rotate(a);
-		ft_putendl_fd("ra", 1);
+		if (reverse)
+		{
+			reverse_rotate(a);
+			ft_putendl_fd("rra", 1);
+		}
+		else
+		{
+			rotate(a);
+			ft_putendl_fd("ra", 1);
+		}
 	}
 	push(b, a);
 	ft_putendl_fd("pb", 1);
 }
 
-void	reverse_sort(t_stack **smallest, t_stack **a, t_stack **b)
+void	sort_b(t_stack *smallest, t_stack **a, t_stack **b, int reverse)
 {
-	while ((*smallest)->prev != NULL)
+	while (smallest->prev != NULL)
 	{
-		reverse_rotate(a);
-		ft_putendl_fd("rra", 1);
+		if (reverse)
+		{
+			reverse_rotate(b);
+			ft_putendl_fd("rrb", 1);
+		}
+		else
+		{
+			rotate(b);
+			ft_putendl_fd("rb", 1);
+		}
 	}
-	push(b, a);
-	ft_putendl_fd("pb", 1);
+	push(a, b);
+	ft_putendl_fd("pa", 1);
 }
 
-void	insertion_sort(t_stack **a, t_stack	**b)
+int	is_all_indexed(t_stack *stack)
+{
+	while (stack)
+	{
+		if (stack->index < 0)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+void	init_index(t_stack **a)
+{
+	t_stack *temp;
+	int	smallest;
+	int	index;
+
+	index = 0;
+	while (!is_all_indexed(*a))
+	{
+		temp = *a;
+		smallest = 2147483647;
+		while (temp)
+		{
+			if (temp->index == -1 && temp->content < smallest)
+				smallest = temp->content;
+			temp = temp->next;
+		}
+		temp = *a;
+		while (temp)
+		{
+			if (temp->content == smallest && temp->index == -1)
+			{
+				temp->index = index;
+				index++;
+			}
+			temp = temp->next;
+		}
+	}
+}
+
+void	insert(t_stack **a, t_stack	**b, t_stack *node)
+{
+	while (node->prev != NULL)
+	{
+		if	(get_index(node, *a) <= count_stack(*a) / 2)
+		{
+			ft_putendl_fd("ra", 1);
+			rotate(a);
+		}
+		else
+		{
+			ft_putendl_fd("rra", 1);
+			reverse_rotate(a);
+		}
+	}
+	ft_putendl_fd("pb", 1);
+	push(b, a);
+}
+
+void	insertion_sort(t_stack **a, t_stack **b)
 {
 	t_stack *smallest;
-	int	i;
-	int j;
 
-	i = 0;
-	j = count_stack(*a) / 2;
-	while (i < j)
+	while (count_stack(*b) != 0)
 	{
-		smallest = search_the_smallest(*a, i, j);
-		if (get_index(smallest, *a) < (j / 2))
-			normal_sort(&smallest, a, b);
-		else
-			reverse_sort(&smallest, a, b);
-		j--;
-	}
-	while (count_stack(*b) > 0)
-	{
-		push(a, b);
+		smallest = find_the_smallest(*b);
+		while (smallest->prev != NULL)
+		{
+			if (get_index(smallest, *b) <= count_stack(*b) / 2)
+			{
+				ft_putendl_fd("rb", 1);
+				rotate(b);
+			}
+			else
+			{
+				ft_putendl_fd("rrb", 1);
+				reverse_rotate(b);
+			}
+		}
 		ft_putendl_fd("pa", 1);
+		push(a, b);
 	}
+}
+
+void	sort(t_stack **a, t_stack **b)
+{
+	t_stack	*temp;
+	int chunks;
+	int nb;
+
+	chunks = count_stack(*a) / 10;
+	nb = 1;
+	while (chunks > 0)
+	{
+		temp = *a;
+		while (temp)
+		{
+			if (temp->index <= 10 * nb)
+			{
+				insert(a, b, temp);
+				temp = *a;
+			}
+			else
+				temp = temp->next;
+		}
+		chunks--;
+		nb++;
+	}
+	insertion_sort(a, b);
 }
 
 int	main(int argc, char **argv)
@@ -252,6 +371,7 @@ int	main(int argc, char **argv)
 		init_with_split(&argv, &a);
 	else if (argc > 2)
 		init_without_split(&argv, &a);
+	init_index(&a);
 	if (!is_sorted(a))
 	{
 		if (count_stack(a) == 2)
@@ -259,7 +379,7 @@ int	main(int argc, char **argv)
 		else if (count_stack(a) == 3)
 			sort_three(&a);
 		else if (count_stack(a) > 3)
-			insertion_sort(&a, &b);
+			sort(&a, &b);
 	}
 	free_list(&a);
 	free_list(&b);
