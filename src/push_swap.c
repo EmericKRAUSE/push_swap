@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/27 15:57:47 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/28 14:19:26 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void	sort_three(t_stack **stack)
 	else if (a < b && b > c)
 	{
 		reverse_rotate(stack);
-		ft_putendl_fd("ra", 1);
+		ft_putendl_fd("rra", 1);
 	}
 	else if (a > b && b < c && a < c)
 	{
@@ -208,44 +208,6 @@ int	get_index(t_stack *smallest, t_stack *stack)
 	return (i);
 }
 
-void	sort_a(t_stack *smallest, t_stack **a, t_stack **b, int reverse)
-{
-	while (smallest->prev != NULL)
-	{
-		if (reverse)
-		{
-			reverse_rotate(a);
-			ft_putendl_fd("rra", 1);
-		}
-		else
-		{
-			rotate(a);
-			ft_putendl_fd("ra", 1);
-		}
-	}
-	push(b, a);
-	ft_putendl_fd("pb", 1);
-}
-
-void	sort_b(t_stack *smallest, t_stack **a, t_stack **b, int reverse)
-{
-	while (smallest->prev != NULL)
-	{
-		if (reverse)
-		{
-			reverse_rotate(b);
-			ft_putendl_fd("rrb", 1);
-		}
-		else
-		{
-			rotate(b);
-			ft_putendl_fd("rb", 1);
-		}
-	}
-	push(a, b);
-	ft_putendl_fd("pa", 1);
-}
-
 int	is_all_indexed(t_stack *stack)
 {
 	while (stack)
@@ -296,7 +258,7 @@ void	insert(t_stack **a, t_stack	**b, t_stack *node)
 			ft_putendl_fd("ra", 1);
 			rotate(a);
 		}
-		else
+		else if (get_index(node, *a) > count_stack(*a) / 2)
 		{
 			ft_putendl_fd("rra", 1);
 			reverse_rotate(a);
@@ -331,29 +293,61 @@ void	insertion_sort(t_stack **a, t_stack **b)
 	}
 }
 
+t_stack	*scan_stack(t_stack *a, int nb)
+{
+	t_stack *top;
+	t_stack *bottom;
+	int	i;
+	int j;
+
+	top = a;
+	bottom = ps_lstlast(a);
+	i = 0;
+	j = 0;
+	while (top)
+	{
+		if (top->index <= 20 * nb)
+			break ;
+		i++;
+		top = top->next;
+	}
+	while (bottom)
+	{
+		if (bottom->index <= 20 * nb)
+			break ;
+		j++;
+		bottom = bottom->prev;
+	}
+	if (i <= j)
+		return (top);
+	else
+		return (bottom);
+}
+
 void	sort(t_stack **a, t_stack **b)
 {
-	t_stack	*temp;
-	int chunks;
+	int chunk;
 	int nb;
+	t_stack *to_push;
+	int i = 0;
 
-	chunks = count_stack(*a) / 10;
+	chunk = count_stack(*a) / 20;
 	nb = 1;
-	while (chunks > 0)
+	while (chunk > 0)
 	{
-		temp = *a;
-		while (temp)
+		while (i < 20 * nb)
 		{
-			if (temp->index <= 10 * nb)
-			{
-				insert(a, b, temp);
-				temp = *a;
-			}
-			else
-				temp = temp->next;
+			to_push = scan_stack(*a, nb);
+			insert(a, b, to_push);
+			i++;
 		}
-		chunks--;
 		nb++;
+		chunk--;
+	}
+	while (*a)
+	{
+		ft_putendl_fd("pb", 1);
+		push(b, a);
 	}
 	insertion_sort(a, b);
 }
