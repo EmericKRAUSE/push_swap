@@ -10,6 +10,9 @@ SRC			=	src/algorithms/sort_three.c\
 				src/list_functions/ps_lstlast.c\
 				src/list_functions/ps_lstnew.c\
 				src/list_functions/reverse_print_list.c\
+				src/parsing/check_for_occurence.c\
+				src/parsing/is_int.c\
+				src/parsing/tab_is_digit.c\
 				src/push_swap_functions/pa.c\
 				src/push_swap_functions/pb.c\
 				src/push_swap_functions/ra.c\

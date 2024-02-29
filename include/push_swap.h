@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 15:42:56 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/29 15:54:00 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	reverse_print_list(t_stack *stack);
 //**********/
 //PARSING
 int	check_for_occurrence(t_stack *stack);
+int	is_int(char **tab);
 int	tab_is_digit(char **tab);
 
 //**********/

@@ -6,89 +6,11 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 15:34:37 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/02/29 16:01:01 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-
-int	tab_is_digit(char **tab)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (tab[y])
-	{
-		x = 0;
-		while (tab[y][x])
-		{
-			if (ft_isdigit(tab[y][x]) || tab[y][x] == '-' || tab[y][x] == '+')
-				x++;
-			else
-				return (0);
-		}
-		y++;
-	}
-	return (1);
-}
-
-int	is_int(char **tab)
-{
-	int			sign;
-	long int	result;
-	int			i;
-	int			x;
-
-	i = 0;
-	while (tab[i])
-	{
-		result = 0;
-		sign = 1;
-		x = 0;
-		if (tab[i][x] == '-' || tab[i][x] == '+')
-		{
-			if (tab[i][x] == '-')
-				sign = -1;
-			x++;
-		}
-		while (tab[i][x] >= '0' && tab[i][x] <= '9')
-		{
-			result = result * 10 + tab[i][x] - 48;
-			x++;
-		}
-		result *= sign;
-		if (result > 2147483647 || result < -2147483648)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int	search_in_stack(t_stack *stack, int nb)
-{
-	while (stack)
-	{
-		if (stack->content == nb)
-			return (1);
-		stack = stack->next;
-	}
-	return (0);
-}
-
-int	check_for_occurrence(t_stack *stack)
-{
-	t_stack	*current;
-
-	current = stack;
-	while(current)
-	{
-		if (search_in_stack(current->next, current->content))
-			return (1);
-		current = current->next;
-	}
-	return (0);
-}
 
 int	is_sorted(t_stack *stack)
 {
@@ -171,6 +93,12 @@ void	init_index(t_stack **a)
 	}
 }
 
+void	sort_stack(t_stack **a, t_stack **b)
+{
+	if (count_stack(*a) > 3 && !stack_is_sorted(*a))
+		pb(b, a);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack			*a;
@@ -190,6 +118,8 @@ int	main(int argc, char **argv)
 			sa(&a);
 		else if (count_stack(a) == 3)
 			sort_three(&a);
+		else if (count_stack(a) > 3)
+			sort_stack(&a, &b);
 	}
 	free_list(&a);
 	free_list(&b);
