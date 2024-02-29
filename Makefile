@@ -1,21 +1,28 @@
 NAME		=	push_swap
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
-SRC			=	src/push_swap.c\
-				src/push.c\
-				src/swap.c\
-				src/rotate.c\
-				src/reverse_rotate.c\
-				src/list_function/create_a_list.c\
-				src/list_function/print_list.c\
-				src/list_function/ps_lstadd_back.c\
-				src/list_function/ps_lstlast.c\
-				src/list_function/ps_lstnew.c\
-				src/list_function/reverse_print_list.c\
+SRC			=	src/algorithms/sort_three.c\
+				src/init/init_with_split.c\
+				src/init/init_without_split.c\
+				src/list_functions/create_list.c\
+				src/list_functions/print_list.c\
+				src/list_functions/ps_lstadd_back.c\
+				src/list_functions/ps_lstlast.c\
+				src/list_functions/ps_lstnew.c\
+				src/list_functions/reverse_print_list.c\
+				src/push_swap_functions/pa.c\
+				src/push_swap_functions/pb.c\
+				src/push_swap_functions/ra.c\
+				src/push_swap_functions/rb.c\
+				src/push_swap_functions/rra.c\
+				src/push_swap_functions/rrb.c\
+				src/push_swap_functions/sa.c\
+				src/push_swap_functions/sb.c\
 				src/free_list.c\
 				src/free_tab.c\
 				src/ft_error.c\
 				src/handle_error.c\
+				src/push_swap.c\
 				src/utils.c
 
 OBJ 		=	${SRC:.c=.o}

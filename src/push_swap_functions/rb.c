@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   rb.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 18:59:40 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/22 12:25:48 by ekrause          ###   ########.fr       */
+/*   Created: 2024/02/29 10:48:20 by ekrause           #+#    #+#             */
+/*   Updated: 2024/02/29 10:48:43 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void	swap(t_stack **stack)
+void	rb(t_stack **b)
 {
-	t_stack	*first;
-	t_stack	*second;
+	t_stack *first;
+	t_stack *last;
 
-	if (count_stack(*stack) < 2)
+	if (count_stack(*b) < 2)
 		return ;
-	first = *stack;
-	second = (*stack)->next;
-	first->next = second->next;
-	first->prev = second;
-	second->next = first;
-	second->prev = NULL;
-	if (first->next != NULL)
-		first->next->prev = first;
-	*stack = second;
+	first = *b;
+	last = ps_lstlast(*b);
+	*b = (*b)->next;
+	(*b)->prev = NULL;
+	first->next = NULL;
+	first->prev = last;
+	last->next = first;
+	ft_putendl_fd("rb", 1);
 }
