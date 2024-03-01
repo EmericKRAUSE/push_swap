@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 15:54:00 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/01 13:11:30 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ int	tab_is_digit(char **tab);
 //PUSH SWAP
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **b, t_stack **a);
-void	ra(t_stack **a);
-void	rb(t_stack **b);
-void	rra(t_stack **a);
-void	rrb(t_stack **b);
+void	ra(t_stack **a, int	rr);
+void	rb(t_stack **b, int rr);
+void	rra(t_stack **a, int rrr);
+void	rrb(t_stack **b, int rrr);
 void	sa(t_stack **a);
 void	sb(t_stack **b);
 

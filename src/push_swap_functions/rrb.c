@@ -6,13 +6,13 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 10:49:53 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 10:50:13 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/01 13:10:23 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	rrb(t_stack **b)
+void	rrb(t_stack **b, int rrr)
 {
 	t_stack *last;
 
@@ -24,5 +24,6 @@ void	rrb(t_stack **b)
 	last->next = *b;
 	(*b)->prev = last;
 	*b = last;
-	ft_putendl_fd("rrb", 1);
+	if (!rrr)
+		ft_putendl_fd("rrb", 1);
 }

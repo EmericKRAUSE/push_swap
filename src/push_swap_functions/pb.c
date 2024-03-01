@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 10:39:56 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 10:47:07 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/01 14:19:34 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	pb(t_stack **b, t_stack **a)
 	temp = *a;
 	*a = (*a)->next;
 	if (*a)
-		(*b)->prev = NULL;
+		(*a)->prev = NULL;
 	if (!*b)
 	{
 		*b = temp;
