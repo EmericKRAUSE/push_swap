@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_list.c                                        :+:      :+:    :+:   */
+/*   handle_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 11:00:30 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 11:00:52 by ekrause          ###   ########.fr       */
+/*   Created: 2024/03/04 09:28:49 by ekrause           #+#    #+#             */
+/*   Updated: 2024/03/04 09:45:45 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void	free_list(t_stack **stack)
+void	handle_error(t_stack **a, char ***numbers)
 {
-	t_stack	*previous;
-
-	while (*stack)
-	{
-		previous = *stack;
-		*stack = (*stack)->next;
-		free (previous);
-	}
+	free_list(a);
+    if (numbers && *numbers)
+        free_tab(numbers);
+    ft_error();
 }

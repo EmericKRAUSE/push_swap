@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_tab.c                                         :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 11:01:06 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 11:01:29 by ekrause          ###   ########.fr       */
+/*   Created: 2024/03/04 09:27:38 by ekrause           #+#    #+#             */
+/*   Updated: 2024/03/04 09:45:45 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void	free_tab(char ***tab)
+void	free_list(t_stack **stack)
 {
-	int	i;
+	t_stack	*previous;
 
-	i = 0;
-	while ((*tab)[i])
+	while (*stack)
 	{
-		free ((*tab)[i++]);
+		previous = *stack;
+		*stack = (*stack)->next;
+		free (previous);
 	}
-	free(*tab);
 }

@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/01 13:11:30 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/04 09:38:38 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,24 @@ typedef struct s_stack
 
 //**********/
 //ALGORITHMS
+void	move_a_to_b(t_stack **a, t_stack **b);
+void	sort_stack(t_stack **a, t_stack **b);
 void	sort_three(t_stack **a);
 
 //**********/
+//ERRORS & FREE
+void	free_list(t_stack **stack);
+void	free_tab(char ***tab);
+void	ft_error(void);
+void	handle_error(t_stack **a, char ***numbers);
+
+//**********/
 //INIT
+void	init_node_a(t_stack *a, t_stack *b);
+void	init_node_b(t_stack *a, t_stack *b);
 void	init_with_split(char ***argv, t_stack **a);
 void	init_without_split(char ***argv, t_stack **a);
+void	set_index(t_stack *stack);
 
 //**********/
 //LIST FUNCTIONS
@@ -45,7 +57,6 @@ void	print_list(t_stack *stack);
 void	ps_lstadd_back(t_stack **stack, t_stack *new);
 t_stack	*ps_lstlast(t_stack *stack);
 t_stack	*ps_lstnew(char *content);
-void	reverse_print_list(t_stack *stack);
 
 //**********/
 //PARSING
@@ -64,19 +75,12 @@ void	rrb(t_stack **b, int rrr);
 void	sa(t_stack **a);
 void	sb(t_stack **b);
 
-
 //**********/
 //UTILS
+void	prep_to_push(t_stack **stack, t_stack *to_rotate, char stack_name);
+t_stack *find_max(t_stack *stack);
+t_stack *find_min(t_stack *stack);
+int	is_sorted(t_stack *stack);
 int	count_stack(t_stack *stack);
-
-//**********/
-//ERROR
-void	handle_error(t_stack **a, char ***numbers);
-void	ft_error(void);
-
-//**********/
-//FREE
-void	free_tab(char ***tab);
-void	free_list(t_stack **stack);
 
 #endif

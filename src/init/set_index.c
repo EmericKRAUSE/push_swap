@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reverse_print_list.c                               :+:      :+:    :+:   */
+/*   set_index.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/21 14:09:41 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/21 14:09:51 by ekrause          ###   ########.fr       */
+/*   Created: 2024/03/04 09:21:12 by ekrause           #+#    #+#             */
+/*   Updated: 2024/03/04 09:21:20 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	reverse_print_list(t_stack *stack)
+void	set_index(t_stack *stack)
 {
-	t_stack *last;
-	int	i;
+	int i;
+	int	median;
 
-	last = ps_lstlast(stack);
 	i = 0;
-	printf("reverse print:\n");
-	while (last != NULL)
+	if (!stack)
+		return ;
+	median = count_stack(stack) / 2;
+	while (stack)
 	{
-		printf("%d: %d\n", i++, last->content);
-		last = last->prev;
+		stack->index = i;
+		if (i <= median)
+			stack->above_median = 1;
+		else
+			stack->above_median = 0;
+		i++;
+		stack = stack->next;
 	}
-	printf("\n");
 }
