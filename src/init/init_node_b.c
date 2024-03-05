@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:20:04 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/04 09:22:39 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/05 10:39:07 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	set_target_b(t_stack *a, t_stack *b)
 {
 	t_stack *current_a;
 	t_stack *target_node;
-	int		best_match_index;
+	long		best_match_index;
 
 	target_node = NULL;
 	while (b)
 	{
-		best_match_index = 2147483647;
+		best_match_index = LONG_MAX;
 		current_a = a;
 		while (current_a)
 		{
@@ -32,7 +32,7 @@ void	set_target_b(t_stack *a, t_stack *b)
 			}
 			current_a = current_a->next;
 		}
-		if (best_match_index == 2147483647)
+		if (best_match_index == LONG_MAX)
 			b->target = find_min(a);
 		else
 			b->target = target_node;

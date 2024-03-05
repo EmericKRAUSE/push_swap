@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:08:22 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/04 09:32:45 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/05 11:51:49 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	prep_to_push(t_stack **stack, t_stack *to_rotate, char stack_name)
 {
-	while (to_rotate->prev)
+	while (*stack != to_rotate)
 	{
 		if (stack_name == 'a')
 		{
@@ -36,10 +36,12 @@ void	prep_to_push(t_stack **stack, t_stack *to_rotate, char stack_name)
 t_stack *find_max(t_stack *stack)
 {
 	t_stack	*max;
-	int best_match_index;
+	long best_match_index;
 
+	if (!stack)
+		return (NULL);
 	max = NULL;
-	best_match_index = -2147483648;
+	best_match_index = LONG_MIN;
 	while (stack)
 	{
 		if (stack->content > best_match_index)
@@ -55,10 +57,12 @@ t_stack *find_max(t_stack *stack)
 t_stack *find_min(t_stack *stack)
 {
 	t_stack	*min;
-	int best_match_index;
+	long best_match_index;
 
+	if (!stack)
+		return (NULL);
 	min = NULL;
-	best_match_index = 2147483647;
+	best_match_index = LONG_MAX;
 	while (stack)
 	{
 		if (stack->content < best_match_index)
@@ -86,6 +90,8 @@ int	count_stack(t_stack *stack)
 {
 	int	i;
 
+	if (!stack)
+		return (0);
 	i = 0;
 	while (stack)
 	{

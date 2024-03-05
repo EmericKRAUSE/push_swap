@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/04 09:38:38 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/05 10:31:22 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "../libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 typedef struct s_stack
 {
