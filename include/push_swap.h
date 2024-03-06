@@ -6,17 +6,17 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/05 10:31:22 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:15:49 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include "../libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
+# include "../libft/libft.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <limits.h>
 
 typedef struct s_stack
 {
@@ -61,15 +61,15 @@ t_stack	*ps_lstnew(char *content);
 
 //**********/
 //PARSING
-int	check_for_occurrence(t_stack *stack);
-int	is_int(char **tab);
-int	tab_is_digit(char **tab);
+int		check_for_occurrence(t_stack *stack);
+int		is_int(char **tab);
+int		tab_is_digit(char **tab);
 
 //**********/
 //PUSH SWAP
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **b, t_stack **a);
-void	ra(t_stack **a, int	rr);
+void	ra(t_stack **a, int rr);
 void	rb(t_stack **b, int rr);
 void	rra(t_stack **a, int rrr);
 void	rrb(t_stack **b, int rrr);
@@ -79,9 +79,9 @@ void	sb(t_stack **b);
 //**********/
 //UTILS
 void	prep_to_push(t_stack **stack, t_stack *to_rotate, char stack_name);
-t_stack *find_max(t_stack *stack);
-t_stack *find_min(t_stack *stack);
-int	is_sorted(t_stack *stack);
-int	count_stack(t_stack *stack);
+t_stack	*find_max(t_stack *stack);
+t_stack	*find_min(t_stack *stack);
+int		is_sorted(t_stack *stack);
+int		count_stack(t_stack *stack);
 
 #endif

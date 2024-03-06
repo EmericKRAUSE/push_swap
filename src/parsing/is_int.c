@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:44:03 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:57:52 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 12:17:29 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ int	is_int(char **tab)
 			x++;
 		}
 		while (tab[i][x] >= '0' && tab[i][x] <= '9')
-		{
-			result = result * 10 + tab[i][x] - 48;
-			x++;
-		}
+			result = result * 10 + tab[i][x++] - 48;
 		result *= sign;
 		if (result > 2147483647 || result < -2147483648)
 			return (0);
