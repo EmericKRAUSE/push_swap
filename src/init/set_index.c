@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:21:12 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/04 09:21:20 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:55:16 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	set_index(t_stack *stack)
 {
-	int i;
+	int	i;
 	int	median;
 
 	i = 0;

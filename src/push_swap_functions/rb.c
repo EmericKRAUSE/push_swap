@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 10:48:20 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/01 13:03:01 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:43:55 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	rb(t_stack **b, int rr)
 {
-	t_stack *first;
-	t_stack *last;
+	t_stack	*first;
+	t_stack	*last;
 
 	if (count_stack(*b) < 2)
 		return ;

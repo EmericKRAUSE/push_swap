@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:08:22 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/05 11:51:49 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:41:27 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	prep_to_push(t_stack **stack, t_stack *to_rotate, char stack_name)
 	}
 }
 
-t_stack *find_max(t_stack *stack)
+t_stack	*find_max(t_stack *stack)
 {
 	t_stack	*max;
-	long best_match_index;
+	long	best_match_index;
 
 	if (!stack)
 		return (NULL);
@@ -54,10 +54,10 @@ t_stack *find_max(t_stack *stack)
 	return (max);
 }
 
-t_stack *find_min(t_stack *stack)
+t_stack	*find_min(t_stack *stack)
 {
 	t_stack	*min;
-	long best_match_index;
+	long	best_match_index;
 
 	if (!stack)
 		return (NULL);

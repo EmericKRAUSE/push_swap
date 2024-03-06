@@ -6,16 +6,16 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:20:30 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/05 10:38:28 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:53:46 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	set_cheapest_a(t_stack *stack)
+static	void	set_cheapest_a(t_stack *stack)
 {
 	t_stack	*cheapest_node;
-	long		cheapest_value;
+	long	cheapest_value;
 
 	if (!stack)
 		return ;
@@ -32,7 +32,7 @@ void	set_cheapest_a(t_stack *stack)
 	cheapest_node->cheapest = 1;
 }
 
-void	set_cost_a(t_stack *a, t_stack *b)
+static	void	set_cost_a(t_stack *a, t_stack *b)
 {
 	int	len_a;
 	int	len_b;
@@ -52,11 +52,11 @@ void	set_cost_a(t_stack *a, t_stack *b)
 	}
 }
 
-void	set_target_a(t_stack *a, t_stack *b)
+static	void	set_target_a(t_stack *a, t_stack *b)
 {
-	t_stack *current_b;
-	t_stack *target_node;
-	long		best_match_index;
+	t_stack	*current_b;
+	t_stack	*target_node;
+	long	best_match_index;
 
 	target_node = NULL;
 	while (a)
@@ -65,7 +65,8 @@ void	set_target_a(t_stack *a, t_stack *b)
 		current_b = b;
 		while (current_b)
 		{
-			if (current_b->content < a->content && current_b->content > best_match_index)
+			if (current_b->content < a->content && \
+			current_b->content > best_match_index)
 			{
 				best_match_index = current_b->content;
 				target_node = current_b;

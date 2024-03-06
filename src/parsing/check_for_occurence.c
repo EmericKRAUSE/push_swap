@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:40:56 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 15:41:36 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:57:42 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	check_for_occurrence(t_stack *stack)
 	t_stack	*current;
 
 	current = stack;
-	while(current)
+	while (current)
 	{
 		if (search_in_stack(current->next, current->content))
 			return (1);

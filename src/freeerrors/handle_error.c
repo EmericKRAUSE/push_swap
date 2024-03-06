@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:28:49 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/04 09:45:45 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 11:01:38 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	handle_error(t_stack **a, char ***numbers)
 {
 	free_list(a);
-    if (numbers && *numbers)
-        free_tab(numbers);
-    ft_error();
+	if (numbers && *numbers)
+		free_tab(numbers);
+	ft_error();
 }

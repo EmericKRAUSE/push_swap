@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_a_list.c                                    :+:      :+:    :+:   */
+/*   create_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:11:07 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 15:16:38 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:02 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	create_list(char **tab, t_stack **stack)
 {
-	t_stack			*node;
-	int					i;
-	
+	t_stack	*node;
+	int		i;
+
 	i = 0;
 	while (tab[i])
 	{
@@ -25,4 +25,3 @@ void	create_list(char **tab, t_stack **stack)
 		i++;
 	}
 }
-

@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/02/29 10:47:00 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:41:53 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	pa(t_stack **a, t_stack **b)
 {
-	t_stack *temp;
-	
+	t_stack	*temp;
+
 	if (!*b)
 		return ;
 	temp = *b;

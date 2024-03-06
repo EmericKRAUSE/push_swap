@@ -6,16 +6,16 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:07:15 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/01 13:02:30 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/06 10:44:52 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	ra(t_stack **a, int	rr)
+void	ra(t_stack **a, int rr)
 {
-	t_stack *first;
-	t_stack *last;
+	t_stack	*first;
+	t_stack	*last;
 
 	if (count_stack(*a) < 2)
 		return ;
