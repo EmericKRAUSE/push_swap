@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:17:40 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:47:31 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:39:47 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,24 @@ static	void	min_on_top(t_stack **a)
 	while (min_node->prev)
 	{
 		if (min_node->above_median)
-			ra(a, 0);
+			ra(a, 1);
 		else
-			rra(a, 0);
+			rra(a, 1);
 	}
 }
 
 static	void	move_b_to_a(t_stack **a, t_stack **b)
 {
 	prep_to_push(a, (*b)->target, 'a');
-	pa(a, b);
+	pa(a, b, 1);
 }
 
 void	sort_stack(t_stack **a, t_stack **b)
 {
 	if (count_stack(*a) > 3 && !is_sorted(*a))
-		pb(b, a);
+		pb(b, a, 1);
 	if (count_stack(*a) > 3 && !is_sorted(*a))
-		pb(b, a);
+		pb(b, a, 1);
 	while (count_stack(*a) > 3 && !is_sorted(*a))
 	{
 		init_node_a(*a, *b);

@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 11:15:49 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:42:13 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	set_index(t_stack *stack);
 //**********/
 //LIST FUNCTIONS
 void	create_list(char **tab, t_stack **stack);
-void	print_list(t_stack *stack);
 void	ps_lstadd_back(t_stack **stack, t_stack *new);
 t_stack	*ps_lstlast(t_stack *stack);
 t_stack	*ps_lstnew(char *content);
@@ -67,14 +66,16 @@ int		tab_is_digit(char **tab);
 
 //**********/
 //PUSH SWAP
-void	pa(t_stack **a, t_stack **b);
-void	pb(t_stack **b, t_stack **a);
-void	ra(t_stack **a, int rr);
-void	rb(t_stack **b, int rr);
-void	rra(t_stack **a, int rrr);
-void	rrb(t_stack **b, int rrr);
-void	sa(t_stack **a);
-void	sb(t_stack **b);
+void	pa(t_stack **a, t_stack **b, int print);
+void	pb(t_stack **b, t_stack **a, int print);
+void	ra(t_stack **a, int print);
+void	rb(t_stack **b, int print);
+void	rr(t_stack **a, t_stack **b, int print);
+void	rra(t_stack **a, int print);
+void	rrb(t_stack **b, int print);
+void	rrr(t_stack **a, t_stack **b, int print);
+void	sa(t_stack **a, int print);
+void	sb(t_stack **b, int print);
 
 //**********/
 //UTILS

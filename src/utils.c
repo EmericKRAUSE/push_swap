@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:08:22 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:41:27 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:01:36 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	prep_to_push(t_stack **stack, t_stack *to_rotate, char stack_name)
 		if (stack_name == 'a')
 		{
 			if (to_rotate->above_median)
-				ra(stack, 0);
+				ra(stack, 1);
 			else
-				rra(stack, 0);
+				rra(stack, 1);
 		}
 		else if (stack_name == 'b')
 		{
 			if (to_rotate->above_median)
-				rb(stack, 0);
+				rb(stack, 1);
 			else
-				rrb(stack, 0);
+				rrb(stack, 1);
 		}
 	}
 }

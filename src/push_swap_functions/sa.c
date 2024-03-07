@@ -6,13 +6,13 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:59:40 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:42:28 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:30:53 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	sa(t_stack **a)
+void	sa(t_stack **a, int print)
 {
 	t_stack	*first;
 	t_stack	*second;
@@ -28,5 +28,6 @@ void	sa(t_stack **a)
 	if (first->next != NULL)
 		first->next->prev = first;
 	*a = second;
-	ft_putendl_fd("sa", 1);
+	if (print)
+		ft_putendl_fd("sa", 1);
 }

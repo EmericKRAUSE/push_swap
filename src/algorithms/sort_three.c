@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 15:29:25 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:46:57 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:32:03 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	sort_three(t_stack **a)
 
 	biggest = find_biggest(*a);
 	if (biggest == *a)
-		ra(a, 0);
+		ra(a, 1);
 	else if ((*a)->next == biggest)
-		rra(a, 0);
+		rra(a, 1);
 	if ((*a)->content > (*a)->next->content)
-		sa(a);
+		sa(a, 1);
 }

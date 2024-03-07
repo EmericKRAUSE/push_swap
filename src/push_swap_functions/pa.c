@@ -6,13 +6,13 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:46:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:41:53 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:29:03 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/push_swap.h"
 
-void	pa(t_stack **a, t_stack **b)
+void	pa(t_stack **a, t_stack **b, int print)
 {
 	t_stack	*temp;
 
@@ -33,5 +33,6 @@ void	pa(t_stack **a, t_stack **b)
 		(*a)->prev = temp;
 		*a = temp;
 	}
-	ft_putendl_fd("pa", 1);
+	if (print)
+		ft_putendl_fd("pa", 1);
 }

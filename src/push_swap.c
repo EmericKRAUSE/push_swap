@@ -6,11 +6,12 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/04 09:43:12 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 15:03:09 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
@@ -28,13 +29,12 @@ int	main(int argc, char **argv)
 	if (!is_sorted(a))
 	{
 		if (count_stack(a) == 2)
-			sa(&a);
+			sa(&a, 1);
 		else if (count_stack(a) == 3)
 			sort_three(&a);
 		else if (count_stack(a) > 3)
 			sort_stack(&a, &b);
 	}
 	free_list(&a);
-	free_list(&b);
 	return (0);
 }

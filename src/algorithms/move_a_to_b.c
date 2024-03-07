@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 09:30:40 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/06 10:49:49 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/07 14:51:36 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ static	void	reverse_rotate_both(t_stack **a, \
 t_stack **b, t_stack *cheapest_node)
 {
 	while (*b != cheapest_node->target && *a != cheapest_node)
-	{
-		rra(a, 1);
-		rrb(b, 1);
-		ft_putendl_fd("rrr", 1);
-	}
+		rrr(a, b, 1);
 	set_index(*a);
 	set_index(*b);
 }
@@ -28,11 +24,7 @@ t_stack **b, t_stack *cheapest_node)
 static	void	rotate_both(t_stack **a, t_stack **b, t_stack *cheapest_node)
 {
 	while (cheapest_node->prev && cheapest_node->target->prev)
-	{
-		ra(a, 1);
-		rb(b, 1);
-		ft_putendl_fd("rr", 1);
-	}
+		rr(a, b, 1);
 	set_index(*a);
 	set_index(*b);
 }
@@ -60,5 +52,5 @@ void	move_a_to_b(t_stack **a, t_stack **b)
 		reverse_rotate_both(a, b, cheapest_node);
 	prep_to_push(a, cheapest_node, 'a');
 	prep_to_push(b, cheapest_node->target, 'b');
-	pb(b, a);
+	pb(b, a, 1);
 }
