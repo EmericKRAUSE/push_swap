@@ -6,12 +6,11 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:39:38 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/08 12:36:06 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/08 15:58:20 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
