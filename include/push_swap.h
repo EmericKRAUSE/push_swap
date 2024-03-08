@@ -6,7 +6,7 @@
 /*   By: ekrause <emeric.yukii@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 13:31:18 by ekrause           #+#    #+#             */
-/*   Updated: 2024/03/07 14:42:13 by ekrause          ###   ########.fr       */
+/*   Updated: 2024/03/08 13:01:04 by ekrause          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ t_stack	*find_max(t_stack *stack);
 t_stack	*find_min(t_stack *stack);
 int		is_sorted(t_stack *stack);
 int		count_stack(t_stack *stack);
+int		ft_strcmp(char *s1, char *s2);
 
 #endif

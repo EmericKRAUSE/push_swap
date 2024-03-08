@@ -34,7 +34,8 @@ SRC			=	src/algorithms/move_a_to_b.c\
 				src/push_swap.c\
 				src/utils.c
 
-SRC_BONUS	=	bonus/checker.c\
+SRC_BONUS	=	bonus/checker_utils.c\
+				bonus/checker.c\
 				src/algorithms/move_a_to_b.c\
 				src/algorithms/sort_stack.c\
 				src/algorithms/sort_three.c\
@@ -89,7 +90,7 @@ clean:
 	$(MAKE_LIBFT) clean
 
 fclean:	clean
-	rm -rf $(NAME)
+	rm -rf $(NAME) $(BONUS)
 	$(MAKE_LIBFT) fclean
 
 re : fclean all
